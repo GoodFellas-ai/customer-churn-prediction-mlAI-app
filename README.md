@@ -24,7 +24,7 @@ Customer churn is a critical business problem. This model helps identify custome
 * Probability-based predictions
 * Interactive Streamlit web app
 
----
+---Ensured feature alignment between training and inference pipeline using persisted column schema.
 
 ## 📊 Input Features
 
