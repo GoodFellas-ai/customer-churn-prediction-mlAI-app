@@ -82,5 +82,4 @@ streamlit run app.py
 
 ## 👤 Author
 
-Your Name
-ERDAL ERDOĞAN 
+ERDAL ERDOĞAN aka RUPERT PUMPKIN 
