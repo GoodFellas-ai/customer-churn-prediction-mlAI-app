@@ -1,3 +1,4 @@
+app_code_english = """
 import streamlit as st
 import pandas as pd
 import pickle
@@ -72,5 +73,9 @@ if st.button("Predict Churn"):
         st.error(f"🚨 Customer is likely to Churn! (Probability: {probability*100:.2f}%) 🔥")
     else:
         st.success(f"✅ Customer is likely to Stay. (Probability: {probability*100:.2f}%) 🎉")
+"""
 
-print("✅ 'app.py' file has been updated. You should now only download the 'model.pkl' file and use it with your Streamlit application.")
+with open('app.py', 'w') as f:
+    f.write(app_code_english)
+
+print("✅ 'app.py' has been updated with English text, configured to load the unified model pipeline.")
