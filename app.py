@@ -1,74 +1,76 @@
-app_code_final = """
 import streamlit as st
 import pandas as pd
 import pickle
+import numpy as np
 
-st.title("Churn App (Minimal Test)")
+st.set_page_config(layout="wide")
+st.title("📱 Telco Customer Churn Prediction (Logistic Regression)")
+st.markdown("Enter customer details to predict churn likelihood using a Logistic Regression model.")
 
-# Load the model pipeline (preprocessor is now part of the pipeline)
+# 1. Load the unified model pipeline
 def load_model_pipeline():
-    with open("model.pkl", "rb") as f:
+    with open('model.pkl', 'rb') as f:
         model_pipeline = pickle.load(f)
     return model_pipeline
 
 try:
     model_pipeline = load_model_pipeline()
-    st.success("Model Pipeline loaded successfully!")
+    st.success("Logistic Regression Model Pipeline loaded successfully!")
 except Exception as e:
-    st.error(f"Error loading model file: {e}")
+    st.error(f"Error loading model pipeline file: {e}")
     st.stop()
 
-# Enter dataset columns exactly (including case!)
-tenure = st.number_input("tenure", 0, 72, 12)
-MonthlyCharges = st.number_input("MonthlyCharges", 0.0, 200.0, 50.0)
-TotalCharges = st.number_input("TotalCharges", 0.0, 10000.0, 500.0)
-Contract = st.selectbox("Contract", ["Month-to-month", "One year", "Two year"])
-PaymentMethod = st.selectbox("PaymentMethod", ["Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"])
-InternetService = st.selectbox("InternetService", ["DSL", "Fiber optic", "No"])
+# 2. User Interface (Inputs)
+# Note: Ensure all features expected by the pipeline are included here.
+# 'customerID' should *not* be part of these inputs if it was dropped during preprocessing.
 
-# You must add all inputs expected by the model here.
-# These are the columns from the X dataframe obtained from df.drop("Churn", axis=1).
-# If your model's trained X dataframe has more columns (e.g., gender, SeniorCitizen, etc.),
-# you should add them to the Streamlit interface or assign default values.
-input_dict = {
-    "tenure": tenure,
-    "MonthlyCharges": MonthlyCharges,
-    "TotalCharges": TotalCharges,
-    "Contract": Contract,
-    "PaymentMethod": PaymentMethod,
-    "InternetService": InternetService,
-    'gender': 'Male', # Example value, you may need to add this for all columns expected by the model.
-    'SeniorCitizen': 0, # Example value
-    'Partner': 'No', # Example value
-    'Dependents': 'No', # Example value
-    'PhoneService': 'No', # Example value
-    'MultipleLines': 'No phone service', # Example value
-    'OnlineSecurity': 'No internet service', # Example value
-    'OnlineBackup': 'No internet service', # Example value
-    'DeviceProtection': 'No internet service', # Example value
-    'TechSupport': 'No internet service', # Example value
-    'StreamingTV': 'No internet service', # Example value
-    'StreamingMovies': 'No internet service', # Example value
-    'PaperlessBilling': 'No' # Example value
-}
+col1, col2 = st.columns(2)
 
-input_df = pd.DataFrame([input_dict])
+with col1:
+    gender = st.selectbox("Gender", ["Female", "Male"])
+    senior = st.selectbox("Senior Citizen?", [0, 1], format_func=lambda x: 'Yes' if x == 1 else 'No')
+    partner = st.selectbox("Has Partner?", ["Yes", "No"])
+    dependents = st.selectbox("Has Dependents?", ["Yes", "No"])
+    tenure = st.slider("Tenure (Months)", 0, 72, 12)
+    phone = st.selectbox("Phone Service", ["Yes", "No"])
+    multiple = st.selectbox("Multiple Lines", ["No", "Yes", "No phone service"])
 
-if st.button("Predict"):
-    st.write("Input:", input_df)
+with col2:
+    internet = st.selectbox("Internet Service", ["DSL", "Fiber optic", "No"])
+    security = st.selectbox("Online Security", ["No", "Yes", "No internet service"])
+    backup = st.selectbox("Online Backup", ["No", "Yes", "No internet service"])
+    protection = st.selectbox("Device Protection", ["No", "Yes", "No internet service"])
+    support = st.selectbox("Tech Support", ["No", "Yes", "No internet service"])
+    tv = st.selectbox("Streaming TV", ["No", "Yes", "No internet service"])
+    movies = st.selectbox("Streaming Movies", ["No", "Yes", "No internet service"])
+
+contract = st.selectbox("Contract Type", ["Month-to-month", "One year", "Two year"])
+billing = st.selectbox("Paperless Billing", ["Yes", "No"])
+payment = st.selectbox("Payment Method", ["Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"])
+charges_m = st.number_input("Monthly Charges", value=50.0, min_value=0.0)
+charges_t = st.number_input("Total Charges", value=float(tenure * charges_m), min_value=0.0)
+
+# 3. Prediction Logic
+if st.button("Predict Churn"):
+    input_dict = {
+        'gender': gender, 'SeniorCitizen': senior, 'Partner': partner, 'Dependents': dependents,
+        'tenure': tenure, 'PhoneService': phone, 'MultipleLines': multiple,
+        'InternetService': internet, 'OnlineSecurity': security, 'OnlineBackup': backup,
+        'DeviceProtection': protection, 'TechSupport': support, 'StreamingTV': tv,
+        'StreamingMovies': movies, 'Contract': contract, 'PaperlessBilling': billing,
+        'PaymentMethod': payment, 'MonthlyCharges': charges_m, 'TotalCharges': charges_t
+    }
+
+    input_df = pd.DataFrame([input_dict])
+
     # Make predictions using the pipeline. Preprocessing is automatically applied.
-    pred = model_pipeline.predict(input_df)
-    probability = model_pipeline.predict_proba(input_df)[0]
+    prediction = model_pipeline.predict(input_df)
+    probability = model_pipeline.predict_proba(input_df)[0][1]
 
-    st.write("Prediction:", pred)
-    st.write("Probability (No Churn, Churn):", probability)
-    if pred[0] == 1:
-        st.error(f"🚨 Customer is likely to churn! (Probability: {probability[1]*100:.2f}%) ")
+    st.divider()
+    if prediction[0] == 1:
+        st.error(f"🚨 Customer is likely to Churn! (Probability: {probability*100:.2f}%) 🔥")
     else:
-        st.success(f"✅ Customer is likely to stay. (Probability: {probability[0]*100:.2f}%) ")
-"""
-
-with open('app.py', 'w') as f:
-    f.write(app_code_final)
+        st.success(f"✅ Customer is likely to Stay. (Probability: {probability*100:.2f}%) 🎉")
 
 print("✅ 'app.py' file has been updated. You should now only download the 'model.pkl' file and use it with your Streamlit application.")
