@@ -6,7 +6,7 @@ This project predicts whether a customer is likely to churn using machine learni
 
 ## 🌐 Live Demo
 
-👉 (Streamlit linkini buraya ekle)
+👉 Link : (https://customer-churn-prediction-mlai-app-arw3du8bwkjz4xormvpbrw.streamlit.app/)
 
 ---
 
