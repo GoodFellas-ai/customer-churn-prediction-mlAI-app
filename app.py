@@ -67,7 +67,7 @@ if st.button('Please make a prediction'):
     st.subheader('Prediction Result:')
     if prediction == 1:
         st.write(f"The customer is likely to churn. (Probability: {prediction_proba[1]:.2f})")
-        st.markdown("<p style='color:red;'><b>Churn Riski: Yüksek</b></p>", unsafe_allow_html=True)
+        st.markdown("<p style='color:red;'><b>Churn Risk: High</b></p>", unsafe_allow_html=True)
     else:
         st.write(f"The customer's likelihood of churning is low. (Probability: {prediction_proba[0]:.2f})")
-        st.markdown("<p style='color:green;'><b>Churn Riski: Düşük</b></p>", unsafe_allow_html=True)
+        st.markdown("<p style='color:green;'><b>Churn Risk: Low</b></p>", unsafe_allow_html=True)
