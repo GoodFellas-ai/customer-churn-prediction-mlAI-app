@@ -171,3 +171,12 @@ if st.button("Predict"):
 
     except Exception as e:
         st.error(f"Prediction error: {e}")
+        
+st.subheader("Insights")
+
+st.info("""
+• Higher tenure → lower churn risk  
+• Month-to-month contracts → higher churn  
+• Higher monthly charges → higher churn probability
+""")
+
