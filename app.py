@@ -83,7 +83,6 @@ if st.button('Please make a prediction'):
 # Customer Churn Prediction App
 # Startup-Style UI (Production Upgrade)
 # ===============================
-
 import streamlit as st
 import pandas as pd
 import joblib
@@ -92,12 +91,10 @@ import os
 st.set_page_config(page_title="Churn AI", layout="wide")
 
 st.title("Customer Churn Intelligence")
-st.caption("AI-powered customer retention prediction system")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
-feature_columns = joblib.load(os.path.join(BASE_DIR, "columns.pkl"))
 
 st.sidebar.header("Customer Profile")
 
@@ -108,8 +105,19 @@ dependents = st.sidebar.selectbox("Dependents", ["Yes", "No"])
 
 tenure = st.sidebar.slider("Tenure", 0, 100, 12)
 phone = st.sidebar.selectbox("Phone Service", ["Yes", "No"])
+multiple = st.sidebar.selectbox("Multiple Lines", ["Yes", "No", "No phone service"])
 internet = st.sidebar.selectbox("Internet Service", ["DSL", "Fiber optic", "No"])
+
+online_security = st.sidebar.selectbox("Online Security", ["Yes", "No", "No internet service"])
+online_backup = st.sidebar.selectbox("Online Backup", ["Yes", "No", "No internet service"])
+device_protection = st.sidebar.selectbox("Device Protection", ["Yes", "No", "No internet service"])
+tech_support = st.sidebar.selectbox("Tech Support", ["Yes", "No", "No internet service"])
+
+streaming_tv = st.sidebar.selectbox("Streaming TV", ["Yes", "No", "No internet service"])
+streaming_movies = st.sidebar.selectbox("Streaming Movies", ["Yes", "No", "No internet service"])
+
 contract = st.sidebar.selectbox("Contract", ["Month-to-month", "One year", "Two year"])
+paperless = st.sidebar.selectbox("Paperless Billing", ["Yes", "No"])
 payment = st.sidebar.selectbox("Payment Method", [
     "Electronic check",
     "Mailed check",
@@ -121,45 +129,45 @@ monthly = st.sidebar.number_input("Monthly Charges", 50.0)
 total = st.sidebar.number_input("Total Charges", 600.0)
 
 # =========================
-# BUILD FULL FEATURE ROW
+# RAW DATA (IMPORTANT FIX)
 # =========================
-input_dict = dict.fromkeys(feature_columns, 0)
-
-def set_col(col):
-    if col in input_dict:
-        input_dict[col] = 1
-
-# categorical encodings (ONE-HOT STYLE)
-set_col(f"gender_{gender}")
-set_col(f"Partner_{partner}")
-set_col(f"Dependents_{dependents}")
-set_col(f"PhoneService_{phone}")
-set_col(f"InternetService_{internet}")
-set_col(f"Contract_{contract}")
-set_col(f"PaymentMethod_{payment}")
-
-# numeric
-if "tenure" in input_dict:
-    input_dict["tenure"] = tenure
-if "MonthlyCharges" in input_dict:
-    input_dict["MonthlyCharges"] = monthly
-if "TotalCharges" in input_dict:
-    input_dict["TotalCharges"] = total
-
-input_df = pd.DataFrame([input_dict])
+input_df = pd.DataFrame([{
+    "gender": gender,
+    "SeniorCitizen": senior,
+    "Partner": partner,
+    "Dependents": dependents,
+    "tenure": tenure,
+    "PhoneService": phone,
+    "MultipleLines": multiple,
+    "InternetService": internet,
+    "OnlineSecurity": online_security,
+    "OnlineBackup": online_backup,
+    "DeviceProtection": device_protection,
+    "TechSupport": tech_support,
+    "StreamingTV": streaming_tv,
+    "StreamingMovies": streaming_movies,
+    "Contract": contract,
+    "PaperlessBilling": paperless,
+    "PaymentMethod": payment,
+    "MonthlyCharges": monthly,
+    "TotalCharges": total
+}])
 
 # =========================
 # PREDICTION
 # =========================
 if st.button("Predict"):
-    pred = model.predict(input_df)[0]
-    proba = model.predict_proba(input_df)[0][1]
+    try:
+        pred = model.predict(input_df)[0]
+        proba = model.predict_proba(input_df)[0][1]
 
-    if pred == 1:
-        st.error("High churn risk")
-    else:
-        st.success("Low churn risk")
+        if pred == 1:
+            st.error("High churn risk")
+        else:
+            st.success("Low churn risk")
 
-    st.metric("Churn Probability", f"{proba:.2%}")
-    st.progress(float(proba))
+        st.metric("Churn Probability", f"{proba:.2%}")
+        st.progress(float(proba))
 
+    except Exception as e:
+        st.error(f"Prediction error: {e}")
