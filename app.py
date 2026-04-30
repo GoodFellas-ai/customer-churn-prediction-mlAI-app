@@ -3,6 +3,12 @@ import pandas as pd
 import joblib
 import numpy as np
 import os
+import os
+import streamlit as st
+
+st.write("📁 Current directory files:")
+st.write(os.listdir())
+
 
 try:
     model_path = os.path.join(os.path.dirname(__file__), 'model.pkl')
