@@ -8,10 +8,10 @@ try:
     model_path = os.path.join(os.path.dirname(__file__), 'model.pkl')
     model_pipeline = joblib.load(model_path)
 except FileNotFoundError:
-    st.error("model.pkl dosyası bulunamadı. Lütfen modelin eğitilip kaydedildiğinden emin olun.")
+    st.error("The model.pkl file could not be found. Please make sure that the model has been trained and saved..")
     st.stop()
 except Exception as e:
-    st.error(f"Model yüklenirken bir hata oluştu: {e}")
+    st.error(f"An error occurred while loading the model.: {e}")
     st.stop()
 
 st.title('📉 Customer Churn Prediction System')
