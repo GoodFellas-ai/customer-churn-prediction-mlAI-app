@@ -163,6 +163,8 @@ pip install -r requirements.txt
 streamlit run app.py
 
 
+
+
 ## 👤 Author
 
 ERDAL ERDOĞAN aka RUPERT PUMPKIN 
