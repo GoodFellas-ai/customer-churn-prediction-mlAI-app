@@ -64,10 +64,10 @@ if st.button('Tahmin Yap'):
     prediction = model_pipeline.predict(input_data)[0]
     prediction_proba = model_pipeline.predict_proba(input_data)[0]
 
-    st.subheader('Tahmin Sonucu:')
+    st.subheader('Prediction Result:')
     if prediction == 1:
-        st.write(f"Müşterinin churn etme olasılığı yüksektir. (Olasılık: {prediction_proba[1]:.2f})")
+        st.write(f"The customer is likely to churn. (Probability: {prediction_proba[1]:.2f})")
         st.markdown("<p style='color:red;'><b>Churn Riski: Yüksek</b></p>", unsafe_allow_html=True)
     else:
-        st.write(f"Müşterinin churn etme olasılığı düşüktür. (Olasılık: {prediction_proba[0]:.2f})")
+        st.write(f"The customer's likelihood of churning is low. (Probability: {prediction_proba[0]:.2f})")
         st.markdown("<p style='color:green;'><b>Churn Riski: Düşük</b></p>", unsafe_allow_html=True)
