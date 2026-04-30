@@ -80,7 +80,7 @@ streamlit run app.py
 
 ---
 
-📉 Customer Churn Intelligence
+## 📉 Customer Churn Intelligence
 
 An end-to-end machine learning system that predicts customer churn and helps identify at-risk customers using behavioral and contract-based data.
 
@@ -161,7 +161,7 @@ columns.pkl # Feature schema alignment
 notebooks/ # EDA and model training
 requirements.txt
 
-▶️ Run Locally
+▶️ Run Locally 
 
 git clone https://github.com/your-username/customer-churn-intelligence.git
 cd customer-churn-intelligence
@@ -179,6 +179,6 @@ Feature consistency handling in inference pipelines
 Business-oriented interpretation of ML outputs
 Practical AI productization using Streamlit
 
-👤 Author
-Erdal Erdoğan aka RUPERT PUMPKIN
+## 👤 Author
+## Erdal Erdoğan aka RUPERT PUMPKIN
 
