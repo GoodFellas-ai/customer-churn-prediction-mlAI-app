@@ -14,8 +14,8 @@ except Exception as e:
     st.error(f"Model yüklenirken bir hata oluştu: {e}")
     st.stop()
 
-st.title('Müşteri Churn Tahmin Uygulaması')
-st.write('Müşteri verilerini girerek churn tahmininde bulunun.')
+st.title('📉 Customer Churn Prediction App')
+st.write('Enter customer information to predict churn probability.')
 
 gender = st.selectbox('Cinsiyet', ['Female', 'Male'])
 senior_citizen = st.selectbox('Senior Citizen', [0, 1])
