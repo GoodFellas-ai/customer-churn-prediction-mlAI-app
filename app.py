@@ -18,7 +18,7 @@ st.title('📉 Customer Churn Prediction System')
 st.caption("Machine Learning - AI powered retention analysis tool")
 st.write('Enter customer information to predict churn probability.')
 
-gender = st.selectbox('Cinsiyet', ['Female', 'Male'])
+gender = st.selectbox('Gender', ['Female', 'Male'])
 senior_citizen = st.selectbox('Senior Citizen', [0, 1])
 partner = st.selectbox('Partner', ['Yes', 'No'])
 dependents = st.selectbox('Dependents', ['No', 'Yes'])
@@ -38,7 +38,7 @@ payment_method = st.selectbox('Payment Method', ['Electronic check', 'Mailed che
 monthly_charges = st.number_input('Monthly Charges', 0.0, 120.0, 50.0)
 total_charges = st.number_input('Total Charges', 0.0, 9000.0, 1000.0)
 
-if st.button('Tahmin Yap'):
+if st.button('Please make a prediction'):
     input_data = pd.DataFrame([{
         'gender': gender,
         'SeniorCitizen': senior_citizen,
