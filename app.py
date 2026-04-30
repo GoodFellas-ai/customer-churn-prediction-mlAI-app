@@ -154,7 +154,7 @@ monthly_charges = st.sidebar.number_input("Monthly Charges", value=50.0)
 total_charges = st.sidebar.number_input("Total Charges", value=600.0)
 contract = st.sidebar.selectbox("Contract Type", ["Month-to-month", "One year", "Two year"])
 
- input_data = pd.DataFrame([{
+  input_data = pd.DataFrame([{
         'gender': gender,
         'SeniorCitizen': senior_citizen,
         'Partner': partner,
