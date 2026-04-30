@@ -6,7 +6,6 @@ import os
 
 
 st.write("📁 Current directory files:")
-st.write(os.listdir())
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pkl")
 
 
