@@ -89,95 +89,77 @@ import pandas as pd
 import joblib
 import os
 
-# ======================
-# PAGE CONFIG
-# ======================
-st.set_page_config(
-    page_title="Customer Churn Intelligence",
-    page_icon="📊",
-    layout="wide"
-)
+st.set_page_config(page_title="Churn AI", layout="wide")
 
-# ======================
-# HEADER
-# ======================
 st.title("Customer Churn Intelligence")
 st.caption("AI-powered customer retention prediction system")
 
-st.markdown("---")
-
-# ======================
-# LOAD MODEL + COLUMNS
-# ======================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-@st.cache_resource
-def load_artifacts():
-    model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
-    columns = joblib.load(os.path.join(BASE_DIR, "columns.pkl"))
-    return model, columns
+model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
+feature_columns = joblib.load(os.path.join(BASE_DIR, "columns.pkl"))
 
-model, feature_columns = load_artifacts()
-
-# ======================
-# SIDEBAR INPUTS
-# ======================
 st.sidebar.header("Customer Profile")
 
-tenure = st.sidebar.slider("Tenure (months)", 0, 100, 12)
-monthly_charges = st.sidebar.number_input("Monthly Charges", value=50.0)
-total_charges = st.sidebar.number_input("Total Charges", value=600.0)
-contract = st.sidebar.selectbox(
-    "Contract Type",
-    ["Month-to-month", "One year", "Two year"]
-)
+gender = st.sidebar.selectbox("Gender", ["Female", "Male"])
+senior = st.sidebar.selectbox("Senior Citizen", [0, 1])
+partner = st.sidebar.selectbox("Partner", ["Yes", "No"])
+dependents = st.sidebar.selectbox("Dependents", ["Yes", "No"])
 
-# ======================
-# BUILD INPUT (SAFE FIX)
-# ======================
+tenure = st.sidebar.slider("Tenure", 0, 100, 12)
+phone = st.sidebar.selectbox("Phone Service", ["Yes", "No"])
+internet = st.sidebar.selectbox("Internet Service", ["DSL", "Fiber optic", "No"])
+contract = st.sidebar.selectbox("Contract", ["Month-to-month", "One year", "Two year"])
+payment = st.sidebar.selectbox("Payment Method", [
+    "Electronic check",
+    "Mailed check",
+    "Bank transfer (automatic)",
+    "Credit card (automatic)"
+])
+
+monthly = st.sidebar.number_input("Monthly Charges", 50.0)
+total = st.sidebar.number_input("Total Charges", 600.0)
+
+# =========================
+# BUILD FULL FEATURE ROW
+# =========================
 input_dict = dict.fromkeys(feature_columns, 0)
 
-# only overwrite known numeric fields (safe)
+def set_col(col):
+    if col in input_dict:
+        input_dict[col] = 1
+
+# categorical encodings (ONE-HOT STYLE)
+set_col(f"gender_{gender}")
+set_col(f"Partner_{partner}")
+set_col(f"Dependents_{dependents}")
+set_col(f"PhoneService_{phone}")
+set_col(f"InternetService_{internet}")
+set_col(f"Contract_{contract}")
+set_col(f"PaymentMethod_{payment}")
+
+# numeric
 if "tenure" in input_dict:
     input_dict["tenure"] = tenure
 if "MonthlyCharges" in input_dict:
-    input_dict["MonthlyCharges"] = monthly_charges
+    input_dict["MonthlyCharges"] = monthly
 if "TotalCharges" in input_dict:
-    input_dict["TotalCharges"] = total_charges
+    input_dict["TotalCharges"] = total
 
-# contract encoding (if exists in model columns)
-contract_col = f"Contract_{contract}"
-if contract_col in input_dict:
-    input_dict[contract_col] = 1
+input_df = pd.DataFrame([input_dict])
 
-input_data = pd.DataFrame([input_dict])
-
-# ======================
+# =========================
 # PREDICTION
-# ======================
-st.subheader("Prediction Engine")
+# =========================
+if st.button("Predict"):
+    pred = model.predict(input_df)[0]
+    proba = model.predict_proba(input_df)[0][1]
 
-if st.button("Run Analysis 🚀"):
-    try:
-        prediction = model.predict(input_data)[0]
-        proba = model.predict_proba(input_data)[0][1]
+    if pred == 1:
+        st.error("High churn risk")
+    else:
+        st.success("Low churn risk")
 
-        if prediction == 1:
-            st.error("⚠️ High Risk: Customer likely to churn")
-        else:
-            st.success("✅ Low Risk: Customer likely to stay")
-
-        st.metric("Churn Probability", f"{proba:.2%}")
-        st.progress(float(proba))
-
-    except Exception as e:
-        st.error(f"Prediction error: {e}")
-
-# ======================
-# FOOTER
-# ======================
-st.markdown("---")
-st.caption("Built with Streamlit • Clean ML Deployment Version")
-st.markdown("---")
-st.caption("Built with Streamlit • ML Churn Intelligence System")
+    st.metric("Churn Probability", f"{proba:.2%}")
+    st.progress(float(proba))
 
