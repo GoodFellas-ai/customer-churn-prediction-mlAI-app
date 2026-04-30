@@ -1,6 +1,6 @@
-^^📊 Customer Churn Prediction App
+## 📊 Customer Churn Prediction App
 
-🚀 Overview
+## 🚀 Overview
 
 This project predicts whether a customer is likely to churn using machine learning. It includes an end-to-end pipeline from data preprocessing to deployment.
 
