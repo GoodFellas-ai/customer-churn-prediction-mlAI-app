@@ -133,6 +133,7 @@ st.markdown("---")
 # -------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "model.pkl")
+feature_columns = joblib.load(os.path.join(BASE_DIR, "columns.pkl"))
 
 @st.cache_resource
 def load_model():
