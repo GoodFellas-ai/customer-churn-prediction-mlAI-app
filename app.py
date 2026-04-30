@@ -71,3 +71,127 @@ if st.button('Please make a prediction'):
     else:
         st.write(f"The customer's likelihood of churning is low. (Probability: {prediction_proba[0]:.2f})")
         st.markdown("<p style='color:green;'><b>Churn Risk: Low</b></p>", unsafe_allow_html=True)
+
+
+
+# ===============================
+# Customer Churn Prediction App
+# Startup-Style UI (Production Upgrade)
+# ===============================
+
+import streamlit as st
+import pandas as pd
+import numpy as np
+import joblib
+import os
+
+# -------------------------------
+# PAGE CONFIG
+# -------------------------------
+st.set_page_config(
+    page_title="Churn AI",
+    page_icon="📊",
+    layout="wide"
+)
+
+# -------------------------------
+# SIMPLE CUSTOM UI STYLE
+# -------------------------------
+st.markdown(
+    """
+    <style>
+    .main {
+        background-color: #0E1117;
+    }
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    h1, h2, h3 {
+        color: #FFFFFF;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# -------------------------------
+# HEADER
+# -------------------------------
+st.title("📊 Customer Churn Intelligence")
+st.caption("AI-powered customer retention prediction system")
+
+st.markdown("---")
+
+# -------------------------------
+# LOAD MODEL
+# -------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "churn_pipeline.pkl")
+
+@st.cache_resource
+def load_model():
+    try:
+        return joblib.load(MODEL_PATH)
+    except Exception as e:
+        st.error(f"Model loading failed: {e}")
+        return None
+
+model = load_model()
+
+# -------------------------------
+# SIDEBAR INPUTS (STARTUP STYLE)
+# -------------------------------
+st.sidebar.header("Customer Profile")
+
+tenure = st.sidebar.slider("Tenure (months)", 0, 100, 12)
+monthly_charges = st.sidebar.number_input("Monthly Charges", value=50.0)
+total_charges = st.sidebar.number_input("Total Charges", value=600.0)
+contract = st.sidebar.selectbox("Contract Type", ["Month-to-month", "One year", "Two year"])
+
+input_data = pd.DataFrame({
+    "tenure": [tenure],
+    "MonthlyCharges": [monthly_charges],
+    "TotalCharges": [total_charges],
+    "Contract": [contract]
+})
+
+# -------------------------------
+# MAIN ACTION
+# -------------------------------
+col1, col2 = st.columns([2, 1])
+
+with col1:
+    st.subheader("Prediction Engine")
+
+    if st.button("Run Churn Analysis 🚀"):
+        if model:
+            try:
+                prediction = model.predict(input_data)[0]
+                proba = model.predict_proba(input_data)[0][1]
+
+                st.markdown("### Result")
+
+                if prediction == 1:
+                    st.error("⚠️ High Risk: Customer likely to churn")
+                else:
+                    st.success("✅ Low Risk: Customer likely to stay")
+
+                st.progress(float(proba))
+                st.metric("Churn Probability", f"{proba:.2%}")
+
+            except Exception as e:
+                st.error(f"Prediction error: {e}")
+        else:
+            st.warning("Model not loaded")
+
+with col2:
+    st.subheader("Insights")
+    st.info("- Higher tenure reduces churn risk\n- Month-to-month contracts increase churn\n- Higher charges may increase churn probability")
+
+# -------------------------------
+# FOOTER
+# -------------------------------
+st.markdown("---")
+st.caption("Built with Streamlit • ML Churn Intelligence System")
+
