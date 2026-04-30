@@ -80,6 +80,89 @@ streamlit run app.py
 
 ---
 
+# 📉 Customer Churn Intelligence
+
+An end-to-end machine learning system that predicts customer churn and helps identify at-risk customers using behavioral and contract-based data.
+
+---
+
+## 🚀 Live Demo
+👉 https://customer-churn-prediction-mlai-app-arw3du8bwkjz4xormvpbrw.streamlit.app/
+
+---
+
+## 🧠 Problem Statement
+Customer churn is one of the most critical challenges in subscription-based businesses.  
+The goal of this project is to predict the probability of churn and support proactive customer retention strategies.
+
+---
+
+## ⚙️ Solution Overview
+This project implements a full ML pipeline:
+
+- Data preprocessing & feature engineering
+- Categorical encoding with consistent inference alignment
+- Trained Random Forest classifier
+- Probability-based churn scoring
+- Deployed interactive Streamlit dashboard
+
+A persistent feature schema (`columns.pkl`) ensures training-inference consistency.
+
+---
+
+## 📊 Key Input Features
+- Tenure
+- Monthly Charges
+- Total Charges
+- Contract Type
+- Payment Method
+- Internet Service
+- Customer service usage indicators
+
+---
+
+## 🧠 Model Architecture
+
+- Algorithm: Random Forest Classifier  
+- Preprocessing: One-Hot Encoding + Scaling  
+- Evaluation Metrics: Accuracy, Precision, Recall, F1-score  
+- Output: Churn probability (0–100%)
+
+---
+
+## 📈 Key Business Insights
+- Month-to-month contracts have significantly higher churn risk  
+- Higher monthly charges correlate with increased churn probability  
+- Long-tenure customers are more likely to stay  
+- Service usage patterns strongly influence retention
+
+---
+
+## 🖥️ Application Features
+- Interactive Streamlit dashboard
+- Real-time churn prediction
+- Probability-based risk scoring
+- Clean UI with business insights panel
+
+---
+
+## 📂 Project Structure
+
+app.py # Streamlit application (production UI)
+model.pkl # Trained ML pipeline
+columns.pkl # Feature schema alignment
+notebooks/ # EDA and model training
+requirements.txt
+
+
+---
+
+## ▶️ Run Locally
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+
+
 ## 👤 Author
 
 ERDAL ERDOĞAN aka RUPERT PUMPKIN 
