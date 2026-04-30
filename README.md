@@ -4,19 +4,17 @@
 
 This project predicts whether a customer is likely to churn using machine learning. It includes an end-to-end pipeline from data preprocessing to deployment.
 
-🌐 Live Demo
+## 🌐 Live Demo
 
-👉 Link : (https://customer-churn-prediction-mlai-app-arw3du8bwkjz4xormvpbrw.streamlit.app/)
-
+## 👉 Link : (https://customer-churn-prediction-mlai-app-arw3du8bwkjz4xormvpbrw.streamlit.app/)
 ---
 
-🧠 Problem Statement
+## 🧠 Problem Statement
 
 Customer churn is a critical business problem. This model helps identify customers at some kind of risk of leaving.
-
 ---
 
-⚙️ Features
+## ⚙️ Features
 
 * Data preprocessing & feature engineering
 * Categorical encoding with consistency
@@ -24,9 +22,11 @@ Customer churn is a critical business problem. This model helps identify custome
 * Probability-based predictions
 * Interactive Streamlit web app
 
----Ensured feature alignment between training and inference pipeline using persisted column schema.
+Ensured feature alignment between training and inference pipeline using persisted column schema.
 
-📊 Input Features
+---
+
+## 📊 Input Features
 
 * Tenure
 * Monthly Charges
@@ -37,7 +37,7 @@ Customer churn is a critical business problem. This model helps identify custome
 
 ---
 
-🛠 Tech Stack
+## 🛠 Tech Stack
 
 * Python
 * Pandas / NumPy
@@ -46,7 +46,7 @@ Customer churn is a critical business problem. This model helps identify custome
 
 ---
 
-🧪 Model Details
+## 🧪 Model Details
 
 * Algorithm: Random Forest Classifier
 * Preprocessing: StandardScaler + One-Hot Encoding
@@ -54,7 +54,7 @@ Customer churn is a critical business problem. This model helps identify custome
 
 ---
 
-📂 Project Structure
+## 📂 Project Structure
 
 * `app.py` → Streamlit app
 * `model.pkl` → trained model
@@ -63,7 +63,7 @@ Customer churn is a critical business problem. This model helps identify custome
 
 ---
 
-▶️ Run Locally
+## ▶️ Run Locally
 
 ```bash
 pip install -r requirements.txt
@@ -72,7 +72,7 @@ streamlit run app.py
 
 ---
 
-🎯 Key Insights
+## 🎯 Key Insights
 
 * Month-to-month contracts have higher churn
 * High monthly charges increase churn risk
@@ -80,27 +80,27 @@ streamlit run app.py
 
 ---
 
-## 📉 Customer Churn Intelligence
+# 📉 Customer Churn Intelligence
 
 An end-to-end machine learning system that predicts customer churn and helps identify at-risk customers using behavioral and contract-based data.
 
 ---
 
-🚀 Live Demo
+## 🚀 Live Demo
 
 👉 https://customer-churn-prediction-mlai-app-arw3du8bwkjz4xormvpbrw.streamlit.app/
 
 ---
 
 
-🧠 Problem Statement
+## 🧠 Problem Statement
 
 Customer churn is one of the most critical challenges in subscription-based businesses.  
 The goal of this project is to predict the probability of churn and support proactive customer retention strategies.
 
 ---
 
-⚙️ Solution Overview
+## ⚙️ Solution Overview
 
 This project implements a full ML pipeline:
 
@@ -114,7 +114,7 @@ A persistent feature schema (`columns.pkl`) ensures training-inference consisten
 
 ---
 
-📊 Key Input Features
+## 📊 Key Input Features
 
 - Tenure
 - Monthly Charges
@@ -126,7 +126,7 @@ A persistent feature schema (`columns.pkl`) ensures training-inference consisten
 
 ---
 
-🧠 Model Architecture
+## 🧠 Model Architecture
 
 - Algorithm: Random Forest Classifier  
 - Preprocessing: One-Hot Encoding + Scaling  
@@ -135,7 +135,7 @@ A persistent feature schema (`columns.pkl`) ensures training-inference consisten
 
 ---
 
-📈 Key Business Insights
+## 📈 Key Business Insights
 
 - Month-to-month contracts have significantly higher churn risk  
 - Higher monthly charges correlate with increased churn probability  
@@ -144,7 +144,7 @@ A persistent feature schema (`columns.pkl`) ensures training-inference consisten
 
 ---
 
-🖥️ Application Features
+## 🖥️ Application Features
 
 - Interactive Streamlit dashboard
 - Real-time churn prediction
@@ -153,7 +153,7 @@ A persistent feature schema (`columns.pkl`) ensures training-inference consisten
 
 ---
 
-📂 Project Structure
+## 📂 Project Structure
 
 app.py # Streamlit application (production UI)
 model.pkl # Trained ML pipeline
@@ -161,7 +161,7 @@ columns.pkl # Feature schema alignment
 notebooks/ # EDA and model training
 requirements.txt
 
-▶️ Run Locally 
+## ▶️ Run Locally 
 
 git clone https://github.com/your-username/customer-churn-intelligence.git
 cd customer-churn-intelligence
@@ -169,7 +169,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ---
 
-🎯 Project Impact
+## 🎯 Project Impact
 
 This project demonstrates:
 
