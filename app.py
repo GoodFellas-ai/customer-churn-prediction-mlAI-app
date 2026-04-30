@@ -132,7 +132,7 @@ st.markdown("---")
 # LOAD MODEL
 # -------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "churn_pipeline.pkl")
+MODEL_PATH = os.path.join(BASE_DIR, "model.pkl")
 
 @st.cache_resource
 def load_model():
