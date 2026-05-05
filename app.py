@@ -5,7 +5,7 @@ import numpy as np
 import os
 
 
-st.write("📁 Current directory files:")
+
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pkl")
 
 
