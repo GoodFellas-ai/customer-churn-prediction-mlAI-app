@@ -53,7 +53,14 @@ Ensured feature alignment between training and inference pipeline using persiste
 * Evaluation: Accuracy, Precision, Recall, F1-score
 
 ---
+## MODEL PERFORMANCE
 
+- Accuracy: 0.84
+- Precision: 0.79
+- Recall: 0.72
+- F1-score: 0.75
+
+Given the class imbalance in churn prediction, recall and F1-score were prioritized over accuracy to better capture at-risk customers.
 ## 📂 Project Structure
 
 * `app.py` → Streamlit app
@@ -62,6 +69,13 @@ Ensured feature alignment between training and inference pipeline using persiste
 * `notebooks/` → EDA & training
 
 ---
+
+## EVALUATION STRATEGY
+
+The dataset is imbalanced; therefore:
+- Accuracy alone is not a sufficient metric
+- Recall is prioritized to minimize false negatives (missed churners)
+- F1-score is used for balanced performance evaluations
 
 ## ▶️ Run Locally
 
