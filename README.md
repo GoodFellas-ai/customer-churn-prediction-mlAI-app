@@ -1,26 +1,31 @@
 # 📊 Customer Churn Prediction App
+---
 
 ## 🚀 Overview
 
 This project predicts whether a customer is likely to churn using machine learning. It includes an end-to-end pipeline from data preprocessing to deployment.
 
+
+
 ## 🌐 Live Demo
 
 ## 👉 Link : (https://customer-churn-prediction-mlai-app-arw3du8bwkjz4xormvpbrw.streamlit.app/)
+
 ---
 
 ## 🧠 Problem Statement
 
 Customer churn is a critical business problem. This model helps identify customers at some kind of risk of leaving.
+
 ---
 
 ## ⚙️ Features
 
-*- Data preprocessing & feature engineering
-*- Categorical encoding with consistency
-*- Model training using Random Forest
-*- Probability-based predictions
-*- Interactive Streamlit web app
+- Data preprocessing & feature engineering
+- Categorical encoding with consistency
+- Model training using Random Forest
+- Probability-based predictions
+- Interactive Streamlit web app
 
 Ensured feature alignment between training and inference pipeline using persisted column schema.
 
@@ -60,6 +65,8 @@ Ensured feature alignment between training and inference pipeline using persiste
 - Recall: 0.72
 - F1-score: 0.76
 
+----
+
 Given the class imbalance in churn prediction, recall and F1-score were prioritized over accuracy to better capture at-risk customers.
 ## 📂 Project Structure
 
@@ -77,6 +84,7 @@ The dataset is imbalanced; therefore:
 - Recall is prioritized to minimize false negatives (missed churners)
 - F1-score is used for balanced performance evaluations
 
+
 ## ▶️ Run Locally
 
 ```bash
@@ -88,9 +96,9 @@ streamlit run app.py
 
 ## 🎯 Key Insights
 
-* Month-to-month contracts have higher churn
-* High monthly charges increase churn risk
-* Long-term customers are more stable
+- Month-to-month contracts have higher churn
+- High monthly charges increase churn risk
+- Long-term customers are more stable
 
 ---
 
@@ -166,21 +174,6 @@ A persistent feature schema (`columns.pkl`) ensures training-inference consisten
 - Clean UI with business insights panel
 
 ---
-
-## 📂 Project Structure
-
-app.py # Streamlit application (production UI)
-model.pkl # Trained ML pipeline
-columns.pkl # Feature schema alignment
-notebooks/ # EDA and model training
-requirements.txt
-
-## ▶️ Run Locally 
-
-git clone https://github.com/your-username/customer-churn-intelligence.git
-- cd customer-churn-intelligence
-- pip install -r requirements.txt
-- streamlit run app.py
 ---
 
 ## 🎯 Project Impact
@@ -192,6 +185,8 @@ This project demonstrates:
 - Feature consistency handling in inference pipelines
 - Business-oriented interpretation of ML outputs
 - Practical AI productization using Streamlit
+
+----
 
 ## 👤 Author
 ## Erdal Erdoğan aka RUPERT PUMPKIN
