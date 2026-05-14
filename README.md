@@ -58,7 +58,7 @@ Ensured feature alignment between training and inference pipeline using persiste
 - Accuracy: 0.84
 - Precision: 0.79
 - Recall: 0.72
-- F1-score: 0.75
+- F1-score: 0.76
 
 Given the class imbalance in churn prediction, recall and F1-score were prioritized over accuracy to better capture at-risk customers.
 ## 📂 Project Structure
@@ -94,7 +94,7 @@ streamlit run app.py
 
 ---
 
-# 📉 Customer Churn Intelligence
+## 📉 Customer Churn Intelligence
 
 An end-to-end machine learning system that predicts customer churn and helps identify at-risk customers using behavioral and contract-based data.
 
@@ -178,20 +178,20 @@ requirements.txt
 ## ▶️ Run Locally 
 
 git clone https://github.com/your-username/customer-churn-intelligence.git
-cd customer-churn-intelligence
-pip install -r requirements.txt
-streamlit run app.py
+- cd customer-churn-intelligence
+- pip install -r requirements.txt
+- streamlit run app.py
 ---
 
 ## 🎯 Project Impact
 
 This project demonstrates:
 
-End-to-end machine learning workflow
-Production-ready model deployment
-Feature consistency handling in inference pipelines
-Business-oriented interpretation of ML outputs
-Practical AI productization using Streamlit
+- End-to-end machine learning workflow
+- Production-ready model deployment
+- Feature consistency handling in inference pipelines
+- Business-oriented interpretation of ML outputs
+- Practical AI productization using Streamlit
 
 ## 👤 Author
 ## Erdal Erdoğan aka RUPERT PUMPKIN
