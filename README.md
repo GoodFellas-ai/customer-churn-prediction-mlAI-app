@@ -16,11 +16,11 @@ Customer churn is a critical business problem. This model helps identify custome
 
 ## ⚙️ Features
 
-* Data preprocessing & feature engineering
-* Categorical encoding with consistency
-* Model training using Random Forest
-* Probability-based predictions
-* Interactive Streamlit web app
+*- Data preprocessing & feature engineering
+*- Categorical encoding with consistency
+*- Model training using Random Forest
+*- Probability-based predictions
+*- Interactive Streamlit web app
 
 Ensured feature alignment between training and inference pipeline using persisted column schema.
 
